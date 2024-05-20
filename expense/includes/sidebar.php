@@ -4,7 +4,6 @@ error_reporting(0);
 include('includes/dbconnection.php');
 ?>
 
-
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
@@ -13,13 +12,14 @@ include('includes/dbconnection.php');
         <div class="profile-usertitle">
             <?php
             $uid = $_SESSION['detsuid'];
-            $ret = mysqli_query($con, "select FullName from tbluser where ID='$uid'");
+            $ret = mysqli_query($con, "select * from staffs where staff_id='$uid'");
             $row = mysqli_fetch_array($ret);
-            $name = $row['FullName'];
-
+            $name = $row['staff_name'];
+            $role = $row['role'];
             ?>
+
             <div class="profile-usertitle-name"><?php echo $name; ?></div>
-            <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+            <div class="profile-usertitle-status"><span class="indicator label-success"></span><?php echo $role ?></div>
         </div>
         <div class="clear"></div>
     </div>

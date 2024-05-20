@@ -78,32 +78,43 @@ require_once '../posBackend/checkIfLoggedIn.php';
 
                 if ($result = mysqli_query($link, $sql)) {
                     if (mysqli_num_rows($result) > 0) {
+                        // fetch email and phone number from accounts table
+
+
+
                         echo '<table class="table table-bordered table-striped">';
                         echo "<thead>";
                         echo "<tr>";
                         echo "<th style='width:7em;'>Member Id</th>";
                         echo "<th>Member Name</th>";
-                        echo "<th style='width:7em;'>Points</th>";
+                        // echo "<th style='width:7em;'>Points</th>";
                         echo "<th>Account ID</th>";
-                        // echo "<th>Email</th>";
-                        // echo "<th>Phone Number</th>";
-                        echo "<th style='width:5em;'>Delete</th>";
+                        echo "<th>Email</th>";
+                        echo "<th>Phone Number</th>";
+                        // echo "<th style='width:5em;'>Delete</th>";
                         echo "</tr>";
                         echo "</thead>";
                         echo "<tbody>";
                         while ($row = mysqli_fetch_array($result)) {
+                            $account_id = $row['account_id'];
+                            $sql2 = "SELECT email, phone_number FROM accounts WHERE account_id = '$account_id'";
+                            $result2 = mysqli_query($link, $sql2);
+                            $row2 = mysqli_fetch_array($result2);
+                            $email = $row2['email'];
+                            $phone_number = $row2['phone_number'];
+
                             echo "<tr>";
                             echo "<td>" . $row['member_id'] . "</td>";
                             echo "<td>" . $row['member_name'] . "</td>";
-                            echo "<td>" . $row['points'] . "</td>";
+                            // echo "<td>" . $row['points'] . "</td>";
                             echo "<td>" . $row['account_id'] . "</td>";
-                            // echo "<td>" . $row['email'] . "</td>";
-                            // echo "<td>" . $row['phone_number'] . "</td>";
-                            echo "<td>";
-                            $deleteSQL = "DELETE FROM memberships WHERE member_id = '" . $row['member_id'] . "';";
-                            echo '<a href="../customerCrud/deleteCustomerVerify.php?id=' . $row['member_id'] . '" title="Delete Record" data-toggle="tooltip" '
-                                . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Member?\n\nThis will alter other modules related to this Member!\n\')"><span class="fa fa-trash text-black"></span></a>';
-                            echo "</td>";
+                            echo "<td>" . $email . "</td>";
+                            echo "<td>" . $phone_number . "</td>";
+                            // echo "<td>";
+                            // $deleteSQL = "DELETE FROM memberships WHERE member_id = '" . $row['member_id'] . "';";
+                            // echo '<a href="../customerCrud/deleteCustomerVerify.php?id=' . $row['member_id'] . '" title="Delete Record" data-toggle="tooltip" '
+                            //     . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Member?\n\nThis will alter other modules related to this Member!\n\')"><span class="fa fa-trash text-black"></span></a>';
+                            // echo "</td>";
                             echo "</tr>";
                         }
                         echo "</tbody>";

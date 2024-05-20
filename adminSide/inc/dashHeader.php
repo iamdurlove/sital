@@ -61,6 +61,7 @@ $staff_role = $row['role'];
                             </a>
                         data;
                         } else if ($staff_role == "Manager") {
+
                             echo <<<data2
      
                             <a class="nav-link" href="../panel/pos-panel.php">
@@ -100,8 +101,8 @@ $staff_role = $row['role'];
                                 Kitchen
                             </a>
                             <div class="sb-sidenav-menu-heading">Report & Analytics</div>
-                            
-                            <a class="nav-link" target="_blank" href="redirect.php">
+                    
+                            <a class="nav-link" target="_blank" href="../redirect.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-fire"></i></div>
                                 Expense Tracker
                             </a>

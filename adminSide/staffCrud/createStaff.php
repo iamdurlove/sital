@@ -124,9 +124,15 @@ $next_account_id = getNextAvailableAccountID($link);
 
         <div class="form-group">
             <label for="role">Role:</label>
-            <input type="text" name="role" id="role" placeholder="Waiter" required class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>"><br>
-            <span class="invalid-feedback"></span>
+            <select name="role" id="role" required class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>">
+                <option value="" disabled selected>Select your role</option>
+                <option value="Manager">Manager</option>
+                <option value="Staff">Staff</option>
+                <option value="Chef">Chef</option>
+            </select><br>
+            <span class="invalid-feedback"><?php echo $role_err; ?></span>
         </div>
+
 
         <div class="form-group">
             <label for="account_id" class="form-label">Account ID:</label>

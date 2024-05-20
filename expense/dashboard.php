@@ -1,12 +1,20 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(1);
 include('includes/dbconnection.php');
+
+$id = $_SESSION['detsuid'];
+$query = "SELECT * FROM staffs WHERE staff_id='$id'";
+$result = mysqli_query($con, $query);
+while ($row = mysqli_fetch_array($result)) {
+	$role = $row['role'];
+}
 if (strlen($_SESSION['detsuid'] == 0))
 	header('location:logout.php');
-
-
+if ($role !== "Manager")
+	header('location:logout.php');
 ?>
+
 <!DOCTYPE html>
 <html>
 
