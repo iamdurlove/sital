@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
 
 
     // Construct the DELETE query with a parameterized query
-    $deleteSQL = "DELETE FROM Restaurant_Tables WHERE table_id = ?";
+    $deleteSQL = "DELETE FROM restaurant_tables WHERE table_id = ?";
 
     // Prepare and execute the DELETE query
     if ($stmt = mysqli_prepare($link, $deleteSQL)) {
@@ -39,4 +39,3 @@ if (isset($_GET['id'])) {
     // Close the connection
     mysqli_close($link);
 }
-?>

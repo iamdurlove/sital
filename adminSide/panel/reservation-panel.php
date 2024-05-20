@@ -3,9 +3,13 @@ session_start(); // Ensure session is started
 require_once '../posBackend/checkIfLoggedIn.php';
 ?>
 <?php include '../inc/dashHeader.php'; ?>
-    <style>
-        .wrapper{ width: 1300px; padding-left: 200px; padding-top: 20px  }
-    </style>
+<style>
+    .wrapper {
+        width: 1300px;
+        padding-left: 200px;
+        padding-top: 20px
+    }
+</style>
 <div class="wrapper">
     <div class="container-fluid pt-5 pl-600">
         <div class="row">
@@ -23,13 +27,13 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-dark">Search</button>
                             </div>
-                            <div class="col" style="text-align: right;" >
+                            <div class="col" style="text-align: right;">
                                 <a href="reservation-panel.php" class="btn btn-light">Show All</a>
                             </div>
                         </div>
                     </form>
                 </div>
-                
+
                 <?php
                 // Include config file
                 require_once "../config.php";
@@ -44,11 +48,10 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         // Default query to fetch all reservations
                         $sql = "SELECT * FROM reservations ORDER BY reservation_date DESC, reservation_time DESC;";
                     }
-                } else{
+                } else {
                     $sql = "SELECT * FROM reservations ORDER BY reservation_date DESC, reservation_time DESC;";
-
                 }
-                
+
                 if ($result = mysqli_query($link, $sql)) {
                     if (mysqli_num_rows($result) > 0) {
                         echo '<table class="table table-bordered table-striped">';
@@ -76,11 +79,11 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['head_count'] . "</td>";
                             echo "<td>" . $row['special_request'] . "</td>";
                             echo "<td>";
-                            echo '<a href="../reservationsCrud/deleteReservationVerify.php?id='. $row['reservation_id'] .'" title="Delete Record" data-toggle="tooltip" '
-                                   . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Reservation?\n\nThis will alter other modules related to this Reservation!\n\')"><span class="fa fa-trash text-black"></span></a>';
+                            echo '<a href="../reservationsCrud/deleteReservationVerify.php?id=' . $row['reservation_id'] . '" title="Delete Record" data-toggle="tooltip" '
+                                . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Reservation?\n\nThis will alter other modules related to this Reservation!\n\')"><span class="fa fa-trash text-black"></span></a>';
                             echo "</td>";
                             echo "<td>";
-                            echo '<a href="../reservationsCrud/reservationReceipt.php?reservation_id='. $row['reservation_id'] .'" title="Receipt" data-toggle="tooltip"><span class="fa fa-receipt text-black"></span></a>';
+                            echo '<a href="../reservationsCrud/reservationReceipt.php?reservation_id=' . $row['reservation_id'] . '" title="Receipt" data-toggle="tooltip"><span class="fa fa-receipt text-black"></span></a>';
                             echo "</td>";
                             echo "</tr>";
                         }

@@ -5,16 +5,12 @@ require_once '../posBackend/checkIfLoggedIn.php';
 <?php
 include '../inc/dashHeader.php';
 require_once '../config.php';
-$query = "SELECT * FROM kitchen WHERE time_ended IS NULL";
+$query = "SELECT * FROM Kitchen WHERE time_ended IS NULL";
 $result = mysqli_query($link, $query);
 ?>
 
 <link href="../css/pos.css" rel="stylesheet" />
 <meta http-equiv="refresh" content="5">
-
-<!-- Audio for notification -->
-<audio id="notificationSound" src="../../assets/audio/notification.wav" preload="auto"></audio>
-
 
 <div class="wrapper" style="width: 1300px; padding-left: 200px; padding-top: 20px">
     <div class="container-fluid pt-5 pl-600 mt-5">
@@ -27,6 +23,7 @@ $result = mysqli_query($link, $query);
 
         <table class="table table-bordered ">
             <thead>
+
                 <tr>
                     <th>Kitchen ID</th>
                     <th>Table ID</th>
@@ -41,6 +38,7 @@ $result = mysqli_query($link, $query);
                 <?php
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+
                         $kitchen_id = $row['kitchen_id'];
                         $table_id = $row['table_id'];
                         $item_id = $row['item_id'];
@@ -65,6 +63,7 @@ $result = mysqli_query($link, $query);
                         if (!$time_ended) {
                             echo '<a href="../posBackend/kitchenBackend/kitchen-panel-back.php?action=set_time_ended&kitchen_id=' . $kitchen_id . '" class="btn btn-danger">Done</a>';
                         }
+
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -76,25 +75,3 @@ $result = mysqli_query($link, $query);
         </table>
     </div>
 </div>
-
-<script>
-    function checkForNewOrders() {
-        const xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                const newOrders = JSON.parse(this.responseText);
-                if (newOrders.length > 0) {
-                    // Play notification sound
-                    document.getElementById('notificationSound').play();
-                    // Update the table (optional, explained later)
-                }
-            }
-        };
-        xmlhttp.open("GET", "../posBackend/checkForNewOrders.php", true);
-        xmlhttp.send();
-    }
-
-    // Call checkForNewOrders initially and set interval for periodic checks
-    checkForNewOrders();
-    setInterval(checkForNewOrders, 4000); // Check every 5 seconds
-</script>

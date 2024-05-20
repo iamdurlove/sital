@@ -13,8 +13,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $user_id = $_SESSION['account_id'];
 
 $query = "SELECT m.member_name, m.points, a.email, a.phone_number, a.register_date
-          FROM Memberships AS m
-          INNER JOIN Accounts AS a ON m.account_id = a.account_id
+          FROM memberships AS m
+          INNER JOIN accounts AS a ON m.account_id = a.account_id
           WHERE m.account_id = ?";
 
 $stmt = $conn->prepare($query);
@@ -35,9 +35,11 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User Profile</title>
 </head>
+
 <body>
     <h2>User Profile</h2>
     <p>Welcome, <?php echo $row['member_name']; ?>!</p>
@@ -47,4 +49,5 @@ $conn->close();
     <p>Register Date: <?php echo $row['register_date']; ?></p>
     <a href="logout.php">Logout</a>
 </body>
+
 </html>

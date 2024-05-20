@@ -43,4 +43,3 @@ if (isset($_GET['id'])) {
     // Close the connection
     mysqli_close($link);
 }
-?>

@@ -3,9 +3,13 @@ session_start(); // Ensure session is started
 require_once '../posBackend/checkIfLoggedIn.php';
 ?>
 <?php include '../inc/dashHeader.php'; ?>
-    <style>
-        .wrapper{ width: 60%; padding-left: 200px; padding-top: 20px  }
-    </style>
+<style>
+    .wrapper {
+        width: 60%;
+        padding-left: 200px;
+        padding-top: 20px
+    }
+</style>
 
 <div class="wrapper">
     <div class="container-fluid pt-5 pl-600">
@@ -24,7 +28,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-dark">Search</button>
                             </div>
-                            <div class="col" style="text-align: right;" >
+                            <div class="col" style="text-align: right;">
                                 <a href="staff-panel.php" class="btn btn-light">Show All</a>
                             </div>
                         </div>
@@ -41,34 +45,34 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         // Modified query to search staff members by staff_name or staff_id
                         /*
                         $sql = "SELECT *
-                                FROM Staffs stf
+                                FROM staffs stf
                                 INNER JOIN Accounts acc ON stf.account_id = acc.account_id
                                 WHERE stf.staff_name LIKE '%$search%' OR stf.staff_id = '$search'
                                 ORDER BY stf.staff_id";
                          * 
                          */
-                        $sql = "SELECT * FROM Staffs WHERE staff_name LIKE '%$search%' OR staff_id = '$search' ORDER BY account_id";
+                        $sql = "SELECT * FROM staffs WHERE staff_name LIKE '%$search%' OR staff_id = '$search' ORDER BY account_id";
                     } else {
                         // Default query to fetch all staff members
                         /*
                         $sql = "SELECT *
-                                FROM Staffs stf
+                                FROM staffs stf
                                 INNER JOIN Accounts acc ON stf.account_id = acc.account_id
                                 ORDER BY stf.staff_id";
                          * 
                          */
-                        $sql = "SELECT * FROM Staffs ORDER BY account_id";
+                        $sql = "SELECT * FROM staffs ORDER BY account_id";
                     }
                 } else {
                     // Default query to fetch all staff members
                     /*
                     $sql = "SELECT *
-                            FROM Staffs stf
+                            FROM staffs stf
                             INNER JOIN Accounts acc ON stf.account_id = acc.account_id
                             ORDER BY stf.staff_id";
                      * 
                      */
-                    $sql = "SELECT * FROM Staffs ORDER BY account_id";
+                    $sql = "SELECT * FROM staffs ORDER BY account_id";
                 }
 
 
@@ -83,7 +87,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         echo "<th>Account ID</th>";
                         //echo "<th>Email</th>";
                         //echo "<th>Phone Number</th>";
-                       // echo "<th style='width:5em;'>Delete</th>";
+                        // echo "<th style='width:5em;'>Delete</th>";
                         echo "</tr>";
                         echo "</thead>";
                         echo "<tbody>";
@@ -95,9 +99,9 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['account_id'] . "</td>";
                             //echo "<td>" . $row['email'] . "</td>";
                             //echo "<td>" . $row['phone_number'] . "</td>";
-                           // echo "<td>";
-                        //    echo '<a href="../staffCrud/delete_staffVerify.php?id=' . $row['staff_id'] . '" title="Delete Record" data-toggle="tooltip" onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Staff?\n\nThis will alter other modules related to this Staff!\n\')"><span class="fa fa-trash text-black"></span></a>';
-                         //   echo "</td>";
+                            // echo "<td>";
+                            //    echo '<a href="../staffCrud/delete_staffVerify.php?id=' . $row['staff_id'] . '" title="Delete Record" data-toggle="tooltip" onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Staff?\n\nThis will alter other modules related to this Staff!\n\')"><span class="fa fa-trash text-black"></span></a>';
+                            //   echo "</td>";
                             echo "</tr>";
                         }
                         echo "</tbody>";

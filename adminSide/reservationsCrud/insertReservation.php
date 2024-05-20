@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reservation_time = $_POST["reservation_time"];
     $reservation_date = $_POST["reservation_date"];
     $special_request = $_POST["special_request"];
-    
+
     $select_query_capacity = "SELECT capacity FROM restaurant_tables WHERE table_id='$table_id';";
     $results_capacity = mysqli_query($link, $select_query_capacity);
 
@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $head_count = $row['capacity'];
         $reservation_id = intval($reservation_time)  . intval($reservation_date)  . intval($table_id);
         // Prepare the SQL query for insertion
-        $insert_query1 = "INSERT INTO Reservations (reservation_id, customer_name, table_id, reservation_time, reservation_date, head_count, special_request) 
+        $insert_query1 = "INSERT INTO reservations (reservation_id, customer_name, table_id, reservation_time, reservation_date, head_count, special_request) 
                         VALUES ('$reservation_id', '$customer_name', '$table_id', '$reservation_time', '$reservation_date', '$head_count', '$special_request');";
-        $insert_query2 = "INSERT INTO Table_Availability (availability_id, table_id, reservation_date, reservation_time, status) 
+        $insert_query2 = "INSERT INTO table_Availability (availability_id, table_id, reservation_date, reservation_time, status) 
                         VALUES ('$reservation_id', '$table_id', '$reservation_date', '$reservation_time',  'no');";
         mysqli_query($link, $insert_query1);
         mysqli_query($link, $insert_query2);
@@ -44,6 +44,7 @@ $bgColor = "#D4F4DD";
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
     <style>
@@ -53,6 +54,7 @@ $bgColor = "#D4F4DD";
             padding: 40px 0;
             background: #EBF0F5;
         }
+
         h1 {
             color: #88B04B;
             font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
@@ -60,18 +62,21 @@ $bgColor = "#D4F4DD";
             font-size: 40px;
             margin-bottom: 10px;
         }
+
         p {
             color: #404F5E;
             font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
             font-size: 20px;
             margin: 0;
         }
+
         i.checkmark {
             color: #9ABC66;
             font-size: 100px;
             line-height: 200px;
             margin-left: -15px;
         }
+
         .card {
             background: white;
             padding: 60px;
@@ -80,34 +85,44 @@ $bgColor = "#D4F4DD";
             display: inline-block;
             margin: 0 auto;
         }
+
         /* Additional CSS styles based on success/error message */
         .alert-success {
             /* Customize the styles for the success message card */
             background-color: <?php echo $bgColor; ?>;
         }
+
         .alert-success i {
-            color: #5DBE6F; /* Customize the checkmark icon color for success */
+            color: #5DBE6F;
+            /* Customize the checkmark icon color for success */
         }
+
         .alert-danger {
             /* Customize the styles for the error message card */
-            background-color: #FFA7A7; /* Custom background color for error */
+            background-color: #FFA7A7;
+            /* Custom background color for error */
         }
+
         .alert-danger i {
-            color: #F25454; /* Customize the checkmark icon color for error */
+            color: #F25454;
+            /* Customize the checkmark icon color for error */
         }
+
         .custom-x {
-            color: #F25454; /* Customize the "X" symbol color for error */
+            color: #F25454;
+            /* Customize the "X" symbol color for error */
             font-size: 100px;
             line-height: 200px;
         }
     </style>
 </head>
+
 <body>
     <div class="card <?php echo $cardClass; ?>" style="display: none;">
         <div style="border-radius: 200px; height: 200px; width: 200px; background: #F8FAF5; margin: 0 auto;">
-            <?php if ($iconClass === 'fa-check-circle'): ?>
+            <?php if ($iconClass === 'fa-check-circle') : ?>
                 <i class="checkmark">✓</i>
-            <?php else: ?>
+            <?php else : ?>
                 <i class="custom-x" style="font-size: 100px; line-height: 200px;">✘</i>
             <?php endif; ?>
         </div>
@@ -143,7 +158,7 @@ $bgColor = "#D4F4DD";
             var messageCard = document.querySelector(".card");
             messageCard.style.display = "none";
             // Redirect to another page after hiding the pop-up (adjust the delay as needed)
-            setTimeout(function () {
+            setTimeout(function() {
                 window.location.href = "../panel/reservation-panel.php"; // Replace with your desired URL
             }, 3000); // 3000 milliseconds = 3 seconds
         }
@@ -152,4 +167,5 @@ $bgColor = "#D4F4DD";
         setTimeout(hidePopup, 3000);
     </script>
 </body>
+
 </html>

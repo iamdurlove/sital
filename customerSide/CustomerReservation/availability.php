@@ -40,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             while ($row = mysqli_fetch_assoc($availableResult)) {
                 echo "Available Table ID: " . $row["table_id"] . "<br>";
                 echo "Capacity: " . $row["capacity"] . "<br>";
-                
             }
             // Construct the reservation link with all table IDs
             $reservedTableIDsString = implode(",", $reservedTableIDs);
@@ -56,7 +55,4 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $reservationLink = "reservePage.php?reservation_date=$selectedDate&head_count=$head_count&reservation_time=$selectedTime&reserved_table_id=0";
         header("Location: $reservationLink");
     }
-    
-
 }
-?>

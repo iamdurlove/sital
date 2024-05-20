@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($uniqueString == "9999912345") {
         echo ' Correct';
-        header("Location: ../reservationsCrud/deleteReservation.php?id=".$table_id ."");
+        header("Location: ../reservationsCrud/deleteReservation.php?id=" . $table_id . "");
     } else {
         echo '<script>alert("Incorrect ID or Password!")</script>';
     }
@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -36,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="../css/verifyAdmin.css" rel="stylesheet" />
 
 </head>
+
 <body>
     <div class="login-container">
         <div class="login_wrapper">
@@ -54,10 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <button class="btn btn-light" type="submit" name="submit" value="submit">Delete Reservation</button>
-                    <a class="btn btn-danger" href="../panel/reservation-panel.php" >Cancel</a>
+                    <a class="btn btn-danger" href="../panel/reservation-panel.php">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </body>
+
 </html>

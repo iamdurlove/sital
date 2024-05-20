@@ -29,8 +29,9 @@ if (isset($_POST['submit'])) {
 }
 
 // Function to get the next available account ID
-function getNextAvailableAccountID($conn) {
-    $sql = "SELECT MAX(account_id) as max_account_id FROM Accounts";
+function getNextAvailableAccountID($conn)
+{
+    $sql = "SELECT MAX(account_id) as max_account_id FROM accounts";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_account_id = $row['max_account_id'] + 1;
@@ -38,8 +39,9 @@ function getNextAvailableAccountID($conn) {
 }
 
 // Function to get the next available Staff ID
-function getNextAvailableStaffID($conn) {
-    $sql = "SELECT MAX(staff_id) as max_staff_id FROM Staffs";
+function getNextAvailableStaffID($conn)
+{
+    $sql = "SELECT MAX(staff_id) as max_staff_id FROM staffs";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_staff_id = $row['max_staff_id'] + 1;
@@ -52,15 +54,21 @@ $next_staff_id = getNextAvailableStaffID($link);
 // Get the next available account ID
 $next_account_id = getNextAvailableAccountID($link);
 ?>
+
 <head>
     <meta charset="UTF-8">
     <title>Create New Staff</title>
     <style>
-       .wrapper{ width: 1300px; padding-left: 200px ; padding-top: 80px; }
-       /* Style the select input */
+        .wrapper {
+            width: 1300px;
+            padding-left: 200px;
+            padding-top: 80px;
+        }
+
+        /* Style the select input */
         #account_id {
             width: 100%;
-           
+
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
@@ -81,12 +89,14 @@ $next_account_id = getNextAvailableAccountID($link);
         /* Style the select when it's required and empty */
         #account_id:required:invalid {
             color: #999;
-            border-color: #f00; /* Red border for validation */
+            border-color: #f00;
+            /* Red border for validation */
         }
 
         /* Style the select when it's required and filled */
         #account_id:required:valid {
-            border-color: #28a745; /* Green border for validation */
+            border-color: #28a745;
+            /* Green border for validation */
             color: #333;
         }
     </style>
@@ -117,7 +127,7 @@ $next_account_id = getNextAvailableAccountID($link);
             <input type="text" name="role" id="role" placeholder="Waiter" required class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>"><br>
             <span class="invalid-feedback"></span>
         </div>
-        
+
         <div class="form-group">
             <label for="account_id" class="form-label">Account ID:</label>
             <input min="1" type="number" name="account_id" placeholder="99" class="form-control <?php echo !$account_idErr ?: 'is-invalid'; ?>" id="account_id" required value="<?php echo $next_account_id; ?>" readonly><br>
@@ -125,7 +135,7 @@ $next_account_id = getNextAvailableAccountID($link);
                 Please provide a valid account_id.
             </div>
         </div>
-        
+
         <div class="form-group">
             <label for="email" class="form-label">Email :</label>
             <input type="text" name="email" placeholder="johnny12@dining.bar.com" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" id="email" required value="<?php echo $email; ?>"><br>
@@ -136,7 +146,7 @@ $next_account_id = getNextAvailableAccountID($link);
 
         <div class="form-group">
             <label for="register_date">Register Date :</label>
-            <input type="date" name="register_date" id="register_date" required class="form-control <?php echo !$register_date_err ?: 'is-invalid';?>" value="<?php echo $register_date; ?>"><br>
+            <input type="date" name="register_date" id="register_date" required class="form-control <?php echo !$register_date_err ?: 'is-invalid'; ?>" value="<?php echo $register_date; ?>"><br>
             <div id="validationServerFeedback" class="invalid-feedback">
                 Please provide a valid register date.
             </div>
@@ -152,12 +162,12 @@ $next_account_id = getNextAvailableAccountID($link);
 
         <div class="form-group">
             <label for="password">Password :</label>
-            <input type="password" name="password" placeholder="johnny1234@" id="password" required class="form-control <?php echo !$password_err ?: 'is-invalid' ; ?>" value="<?php echo $password; ?>"><br>
+            <input type="password" name="password" placeholder="johnny1234@" id="password" required class="form-control <?php echo !$password_err ?: 'is-invalid'; ?>" value="<?php echo $password; ?>"><br>
             <div id="validationServerFeedback" class="invalid-feedback">
                 Please provide a valid password.
             </div>
         </div>
-        
+
         <div class="form-group mb-5">
             <input type="submit" class="btn btn-dark" value="Create Staff">
         </div>

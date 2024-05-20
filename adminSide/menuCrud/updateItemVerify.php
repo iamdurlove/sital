@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -35,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="../css/verifyAdmin.css" rel="stylesheet" />
 
 </head>
+
 <body>
     <div class="login-container">
         <div class="login_wrapper">
@@ -53,10 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <button class="btn btn-light" type="submit" name="submit" value="submit">Login</button>
-                    <a class="btn btn-danger" href="../panel/menu-panel.php" >Cancel</a>
+                    <a class="btn btn-danger" href="../panel/menu-panel.php">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </body>
+
 </html>

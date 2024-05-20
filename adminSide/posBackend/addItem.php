@@ -17,7 +17,7 @@ if (isset($_GET['addToCart'])) {
             $update_quantity_sql = "UPDATE bill_items SET quantity = quantity + $quantity WHERE bill_id = '$bill_id' AND item_id = '$item_id'";
             if (mysqli_query($link, $update_quantity_sql)) {
                 // Update the Kitchen table too
-                $update_kitchen_sql = "UPDATE Kitchen SET quantity = quantity + $quantity, time_submitted = '$currentTime' WHERE table_id = '$table_id' AND item_id = '$item_id'";
+                $update_kitchen_sql = "UPDATE kitchen SET quantity = quantity + $quantity, time_submitted = '$currentTime' WHERE table_id = '$table_id' AND item_id = '$item_id'";
                 mysqli_query($link, $update_kitchen_sql);
 
                 echo '<script>alert("Quantity updated successfully")</script>';
@@ -28,7 +28,7 @@ if (isset($_GET['addToCart'])) {
         } else {
             // Record doesn't exist, insert new record
             $insert_item_sql = "INSERT INTO bill_items (bill_id, item_id, quantity) VALUES ('$bill_id', '$item_id', '$quantity')";
-            $insert_kitchen_sql = "INSERT INTO Kitchen (table_id, item_id, quantity, time_submitted) VALUES ('$table_id', '$item_id', '$quantity', '$currentTime')";
+            $insert_kitchen_sql = "INSERT INTO kitchen (table_id, item_id, quantity, time_submitted) VALUES ('$table_id', '$item_id', '$quantity', '$currentTime')";
 
             if (mysqli_query($link, $insert_item_sql) && mysqli_query($link, $insert_kitchen_sql)) {
                 echo '<script>alert("Item added to cart successfully")</script>';
@@ -41,4 +41,3 @@ if (isset($_GET['addToCart'])) {
         echo '<script>alert("Error checking bill item: ' . mysqli_error($link) . '")</script>';
     }
 }
-?>

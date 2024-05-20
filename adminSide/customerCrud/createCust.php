@@ -17,8 +17,9 @@ $input_phone_number = $phone_number_err = $phone_number = "";
 $input_password = $password_err = $password = "";
 
 // Function to get the next available account ID
-function getNextAvailableAccountID($conn) {
-    $sql = "SELECT MAX(account_id) as max_account_id FROM Accounts";
+function getNextAvailableAccountID($conn)
+{
+    $sql = "SELECT MAX(account_id) as max_account_id FROM accounts";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_account_id = $row['max_account_id'] + 1;
@@ -26,8 +27,9 @@ function getNextAvailableAccountID($conn) {
 }
 
 // Function to get the next available Member ID
-function getNextAvailableMemberID($conn) {
-    $sql = "SELECT MAX(member_id) as max_member_id FROM Memberships";
+function getNextAvailableMemberID($conn)
+{
+    $sql = "SELECT MAX(member_id) as max_member_id FROM memberships";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $next_member_id = $row['max_member_id'] + 1;
@@ -40,11 +42,17 @@ $next_member_id = getNextAvailableMemberID($link);
 // Get the next available account ID
 $next_account_id = getNextAvailableAccountID($link);
 ?>
+
 <head>
     <meta charset="UTF-8">
     <title>Create New Membership</title>
     <style>
-        .wrapper{ width: 1300px; padding-left: 200px; padding-top: 80px; }
+        .wrapper {
+            width: 1300px;
+            padding-left: 200px;
+            padding-top: 80px;
+        }
+
         /* Style the select input */
         #account_id {
             width: 100%;
@@ -68,12 +76,14 @@ $next_account_id = getNextAvailableAccountID($link);
         /* Style the select when it's required and empty */
         #account_id:required:invalid {
             color: #999;
-            border-color: #f00; /* Red border for validation */
+            border-color: #f00;
+            /* Red border for validation */
         }
 
         /* Style the select when it's required and filled */
         #account_id:required:valid {
-            border-color: #28a745; /* Green border for validation */
+            border-color: #28a745;
+            /* Green border for validation */
             color: #333;
         }
     </style>
@@ -84,7 +94,7 @@ $next_account_id = getNextAvailableAccountID($link);
     <p>Please fill in Membership Information</p>
 
     <form method="POST" action="success_createMembership.php" class="ht-600 w-50">
-        
+
         <div class="form-group">
             <label for="member_id" class="form-label">Member ID:</label>
             <input min="1" type="number" name="member_id" placeholder="1" class="form-control <?php echo $member_id_err ? 'is-invalid' : ''; ?>" id="member_id" required value="<?php echo $next_member_id; ?>" readonly><br>
@@ -92,7 +102,7 @@ $next_account_id = getNextAvailableAccountID($link);
                 Please provide a valid member_id.
             </div>
         </div>
-        
+
         <div class="form-group">
             <label for="member_name" class="form-label">Member Name :</label>
             <input type="text" name="member_name" placeholder="Johnny Hatsoff" class="form-control <?php echo $member_name_err ? 'is-invalid' : ''; ?>" id="member_name" required value="<?php echo $member_name; ?>"><br>
@@ -116,7 +126,7 @@ $next_account_id = getNextAvailableAccountID($link);
                 Please provide a valid account_id.
             </div>
         </div>
-        
+
         <div class="form-group">
             <label for="email" class="form-label">Email :</label>
             <input type="text" name="email" placeholder="johnny12@dining.bar.com" class="form-control <?php echo !$emailErr ?: 'is-invalid'; ?>" id="email" required value="<?php echo $email; ?>"><br>
@@ -127,7 +137,7 @@ $next_account_id = getNextAvailableAccountID($link);
 
         <div class="form-group">
             <label for="register_date">Register Date :</label>
-            <input type="date" name="register_date" id="register_date" required class="form-control <?php echo !$register_date_err ?: 'is-invalid';?>" value="<?php echo $register_date; ?>"><br>
+            <input type="date" name="register_date" id="register_date" required class="form-control <?php echo !$register_date_err ?: 'is-invalid'; ?>" value="<?php echo $register_date; ?>"><br>
             <div id="validationServerFeedback" class="invalid-feedback">
                 Please provide a valid register date.
             </div>
@@ -143,12 +153,12 @@ $next_account_id = getNextAvailableAccountID($link);
 
         <div class="form-group">
             <label for="password">Password :</label>
-            <input type="password" name="password" placeholder="johnny1234@" id="password" required class="form-control <?php echo !$password_err ?: 'is-invalid' ; ?>" value="<?php echo $password; ?>"><br>
+            <input type="password" name="password" placeholder="johnny1234@" id="password" required class="form-control <?php echo !$password_err ?: 'is-invalid'; ?>" value="<?php echo $password; ?>"><br>
             <div id="validationServerFeedback" class="invalid-feedback">
                 Please provide a valid password.
             </div>
         </div>
-        
+
         <div class="form-group mb-5">
             <input type="submit" name="submit" class="btn btn-dark" value="Create Membership">
         </div>

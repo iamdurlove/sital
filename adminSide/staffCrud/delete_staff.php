@@ -12,11 +12,11 @@ if (isset($_GET['id'])) {
     mysqli_query($link, $disableForeignKeySQL);
 
     // Construct the DELETE query
-    $deleteSQL = "DELETE FROM Staffs WHERE staff_id = ?";
+    $deleteSQL = "DELETE FROM staffs WHERE staff_id = ?";
 
     // Prepare the DELETE query
     $stmt = $link->prepare($deleteSQL);
-    
+
     // Bind the parameter
     $stmt->bind_param("i", $staff_id);
 
@@ -40,4 +40,3 @@ if (isset($_GET['id'])) {
     // Close the connection
     mysqli_close($link);
 }
-?>

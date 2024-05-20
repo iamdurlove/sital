@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($uniqueString == "9999912345") {
         echo ' Correct';
-        header("Location: ../accountCrud/deleteAccount.php?id=".$table_id ."");
+        header("Location: ../accountCrud/deleteAccount.php?id=" . $table_id . "");
     } else {
         echo '<script>alert("Incorrect ID or Password!")</script>';
     }
@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -34,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="../css/verifyAdmin.css" rel="stylesheet" />
 </head>
+
 <body>
     <div class="login-container">
         <div class="login_wrapper">
@@ -52,10 +54,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <button class="btn btn-light" type="submit" name="submit" value="submit">Delete Account</button>
-                    <a class="btn btn-danger" href="../panel/account-panel.php" >Cancel</a>
+                    <a class="btn btn-danger" href="../panel/account-panel.php">Cancel</a>
                 </form>
             </div>
         </div>
     </div>
 </body>
+
 </html>

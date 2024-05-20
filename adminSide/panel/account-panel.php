@@ -3,9 +3,13 @@ session_start(); // Ensure session is started
 require_once '../posBackend/checkIfLoggedIn.php';
 ?>
 <?php include '../inc/dashHeader.php'; ?>
-    <style>
-        .wrapper{ width: 1300px; padding-left: 200px; padding-top: 20px  }
-    </style>
+<style>
+    .wrapper {
+        width: 1300px;
+        padding-left: 200px;
+        padding-top: 20px
+    }
+</style>
 
 <div class="wrapper">
     <div class="container-fluid pt-5 pl-600">
@@ -16,7 +20,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                     <a href="../staffCrud/createStaff.php" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Add Staff</a>
                     <a href="../customerCrud/createCust.php" class="btn btn-outline-dark"><i class="fa fa-plus"></i> Add Memberships</a>
                 </div>
-                
+
                 <div class="mb-3">
                     <form method="POST" action="#">
                         <div class="row">
@@ -26,13 +30,13 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-dark">Search</button>
                             </div>
-                            <div class="col" style="text-align: right;" >
+                            <div class="col" style="text-align: right;">
                                 <a href="account-panel.php" class="btn btn-light">Show All</a>
                             </div>
                         </div>
                     </form>
                 </div>
-                
+
                 <?php
                 // Include config file
                 require_once "../config.php";
@@ -42,19 +46,19 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         $search = $_POST['search'];
 
                         $sql = "SELECT *
-                                FROM Accounts
+                                FROM accounts
                                 WHERE email LIKE '%$search%' OR account_id LIKE '%$search%'
                                 ORDER BY account_id;";
                     } else {
                         // Default query to fetch all accounts
                         $sql = "SELECT *
-                                FROM Accounts
+                                FROM accounts
                                 ORDER BY account_id;";
                     }
                 } else {
                     // Default query to fetch all accounts
                     $sql = "SELECT *
-                            FROM Accounts
+                            FROM accounts
                             ORDER BY account_id;";
                 }
 
@@ -69,7 +73,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         echo "<th>Phone Number</th>";
                         echo "<th>Password</th>";
                         //echo "<th>Account Type</th>"; // Display account type
-                       // echo "<th>Delete</th>";
+                        // echo "<th>Delete</th>";
                         echo "</tr>";
                         echo "</thead>";
                         echo "<tbody>";
@@ -81,11 +85,11 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['phone_number'] . "</td>";
                             echo "<td>" . $row['password'] . "</td>";
                             //echo "<td>" . ucfirst($row['account_type']) . "</td>"; // Display account type
-                          //  echo "<td>";
-                          //  $deleteSQL = "DELETE FROM Accounts WHERE account_id = '" . $row['account_id'] . "';";
-                           // echo '<a href="../accountCrud/deleteAccountVerify.php?id=' . $row['account_id'] . '" title="Delete Record" data-toggle="tooltip" '
-                           //         . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Account?\n\nThis will alter other modules related to this Account!\n\')"><span class="fa fa-trash text-black"></span></a>';
-                           // echo "</td>";
+                            //  echo "<td>";
+                            //  $deleteSQL = "DELETE FROM Accounts WHERE account_id = '" . $row['account_id'] . "';";
+                            // echo '<a href="../accountCrud/deleteAccountVerify.php?id=' . $row['account_id'] . '" title="Delete Record" data-toggle="tooltip" '
+                            //         . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to delete this Account?\n\nThis will alter other modules related to this Account!\n\')"><span class="fa fa-trash text-black"></span></a>';
+                            // echo "</td>";
                             echo "</tr>";
                         }
                         echo "</tbody>";

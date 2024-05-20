@@ -12,4 +12,3 @@ session_destroy();
 // Redirect the user to the home page
 header("Location: ../../customerSide/home/home.php"); // Change "home.php" to your desired destination
 exit();
-?>

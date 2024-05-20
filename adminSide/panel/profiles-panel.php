@@ -1,20 +1,14 @@
 <?php
 session_start(); // Ensure session is started
 require_once '../posBackend/checkIfLoggedIn.php';
-include '../inc/dashHeader.php'; 
+include '../inc/dashHeader.php';
 require_once '../config.php';
-
 ?>
 
-
-    
-
-
-
 <div class="container-fluid">
-    
+
     <div class="row">
-        
+
         <div class="col-md-6 order-md-1  " style="margin-top: 6rem; margin-left: 15rem;">
             <h2 class="pull-left">Search Member</h2>
             <form method="get" action="#">
@@ -23,11 +17,11 @@ require_once '../config.php';
                         <input required type="text" id="member_id" style="width:150px" name="member_id" class="form-control" placeholder="Enter Member ID">
                     </div>
                     <div class="col-md-6">
-                        <button type="submit"  class="btn btn-dark">Search</button>
-                    </div> 
+                        <button type="submit" class="btn btn-dark">Search</button>
+                    </div>
                 </div>
             </form><br>
-            
+
             <?php
             require_once '../config.php';
             $currentMonthStart = date('Y-m-01');
@@ -38,38 +32,37 @@ require_once '../config.php';
 
             $memberId = isset($_GET['member_id']) ? $_GET['member_id'] : 1;
             // Get member's most ordered items
-            $mostOrderedItemsQuery = "SELECT Menu.item_name, SUM(Bill_Items.quantity) AS order_count
-                                      FROM Bill_Items
-                                      INNER JOIN Menu ON Bill_Items.item_id = Menu.item_id
-                                      INNER JOIN Bills ON Bill_Items.bill_id = Bills.bill_id
-                                      WHERE Bills.member_id = $memberId
-                                      GROUP BY Bill_Items.item_id
+            $mostOrderedItemsQuery = "SELECT menu.item_name, SUM(bill_items.quantity) AS order_count
+                                      FROM bill_items
+                                      INNER JOIN menu ON bill_items.item_id = menu.item_id
+                                      INNER JOIN bills ON bill_items.bill_id = bills.bill_id
+                                      WHERE bills.member_id = $memberId
+                                      GROUP BY bill_items.item_id
                                       ORDER BY order_count DESC";
             $mostOrderedItemsResult = mysqli_query($link, $mostOrderedItemsQuery);
             // Check if any results were returned
-            if(mysqli_num_rows($mostOrderedItemsResult) == 0) {
+            if (mysqli_num_rows($mostOrderedItemsResult) == 0) {
                 echo "Member ID not found.";
-            }
-            else {
-            ?>          
-            <h3>Showing Member ID - <?php echo $memberId; ?></h3>
-            <h3>Most Ordered Items - (All Time)</h3>
-            <table class="table ">
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($mostOrderedItemsResult)) : ?>
+            } else {
+            ?>
+                <h3>Showing Member ID - <?php echo $memberId; ?></h3>
+                <h3>Most Ordered Items - (All Time)</h3>
+                <table class="table ">
+                    <thead>
                         <tr>
-                            <td><?php echo $row['item_name']; ?></td>
-                            <td><?php echo $row['order_count']; ?></td>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
                         </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($mostOrderedItemsResult)) : ?>
+                            <tr>
+                                <td><?php echo $row['item_name']; ?></td>
+                                <td><?php echo $row['order_count']; ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             <?php } ?>
         </div>
     </div>
@@ -109,7 +102,7 @@ require_once '../config.php';
 
     // Create the donut chart
     var ctx = document.getElementById('mostOrderedItemsChart');
-    
+
     var mostOrderedItemsChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -133,11 +126,12 @@ require_once '../config.php';
                 display: true,
                 position: 'right'
             },
-            is3D:true
+            is3D: true
         }
     });
 </script>
 
 
 
-<?php include '../inc/dashFooter.php';  // Include your footer file here ?>
+<?php include '../inc/dashFooter.php';  // Include your footer file here 
+?>

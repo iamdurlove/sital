@@ -3,9 +3,13 @@ session_start(); // Ensure session is started
 require_once '../posBackend/checkIfLoggedIn.php';
 ?>
 <?php include '../inc/dashHeader.php'; ?>
-    <style>
-        .wrapper{ width: 1300px; padding-left: 200px; padding-top: 20px  }
-    </style>
+<style>
+    .wrapper {
+        width: 1300px;
+        padding-left: 200px;
+        padding-top: 20px
+    }
+</style>
 
 <div class="wrapper">
     <div class="container-fluid pt-5 pl-600">
@@ -20,10 +24,10 @@ require_once '../posBackend/checkIfLoggedIn.php';
                         <div class="row">
                             <div class="col-md-6">
                                 <select name="search" id="search" class="form-control">
-                                    <option value="">Select Item Type or Item Category</option>      
+                                    <option value="">Select Item Type or Item Category</option>
                                     <option value="Main Dishes">Main Dishes</option>
                                     <option value="Side Snacks">Side Snacks</option>
-                                    <option value="Drinks">Drinks</option>                                    
+                                    <option value="Drinks">Drinks</option>
                                     <option value="Steak & Ribs">Steak & Ribs</option>
                                     <option value="Seafood">Seafood</option>
                                     <option value="Pasta">Pasta</option>
@@ -44,7 +48,7 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             <div class="col-md-3">
                                 <button type="submit" class="btn btn-dark">Search</button>
                             </div>
-                            <div class="col" style="text-align: right;" >
+                            <div class="col" style="text-align: right;">
                                 <a href="menu-panel.php" class="btn btn-light">Show All</a>
                             </div>
                         </div>
@@ -58,14 +62,14 @@ require_once '../posBackend/checkIfLoggedIn.php';
                     if (!empty($_POST['search'])) {
                         $search = $_POST['search'];
 
-                        $sql = "SELECT * FROM Menu WHERE item_type LIKE '%$search%' OR item_category LIKE '%$search%' OR item_name LIKE '%$search%' OR item_id LIKE '%$search%' ORDER BY item_id;";
+                        $sql = "SELECT * FROM menu WHERE item_type LIKE '%$search%' OR item_category LIKE '%$search%' OR item_name LIKE '%$search%' OR item_id LIKE '%$search%' ORDER BY item_id;";
                     } else {
                         // Default query to fetch all items
-                        $sql = "SELECT * FROM Menu ORDER BY item_id;";
+                        $sql = "SELECT * FROM menu ORDER BY item_id;";
                     }
                 } else {
                     // Default query to fetch all items
-                    $sql = "SELECT * FROM Menu ORDER BY item_id;";
+                    $sql = "SELECT * FROM menu ORDER BY item_id;";
                 }
 
                 if ($result = mysqli_query($link, $sql)) {
@@ -94,10 +98,10 @@ require_once '../posBackend/checkIfLoggedIn.php';
                             echo "<td>" . $row['item_description'] . "</td>";
                             echo "<td>";
                             // Modify link with the pencil icon
-                             $update_sql = "UPDATE Menu SET item_name=?, item_type=?, item_category=?, item_price=?, item_description=? WHERE item_id=?";
-                            echo '<a href="../menuCrud/updateItemVerify.php?id='. $row['item_id'] .'" title="Modify Record" data-toggle="tooltip"'
-                                    . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to Edit this Item?\')">'
-                             . '<i class="fa fa-pencil" aria-hidden="true"></i></a>';
+                            $update_sql = "UPDATE menu SET item_name=?, item_type=?, item_category=?, item_price=?, item_description=? WHERE item_id=?";
+                            echo '<a href="../menuCrud/updateItemVerify.php?id=' . $row['item_id'] . '" title="Modify Record" data-toggle="tooltip"'
+                                . 'onclick="return confirm(\'Admin permission Required!\n\nAre you sure you want to Edit this Item?\')">'
+                                . '<i class="fa fa-pencil" aria-hidden="true"></i></a>';
                             echo "</td>";
 
                             /*echo "<td>";
