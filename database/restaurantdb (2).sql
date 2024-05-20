@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 11:35 PM
+-- Generation Time: May 20, 2024 at 08:59 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -43,7 +43,8 @@ INSERT INTO `accounts` (`account_id`, `email`, `register_date`, `phone_number`, 
 (1, 'sicawi9251@javnoi.com', '2024-05-20', '9896565656', 'test123'),
 (2, 'anil@gmail.com', '2024-05-20', '98656565656', 'test123'),
 (3, 'durlove60@gmail.com', '2024-05-20', '5656565656', 'test123'),
-(4, 'lodu@gmail.com', '2024-05-20', '56565656565', 'lodu123');
+(4, 'lodu@gmail.com', '2024-05-20', '56565656565', 'lodu123'),
+(5, 'srk@gmail.com', '2024-05-21', '56565656656', 'test123');
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,8 @@ INSERT INTO `bills` (`bill_id`, `staff_id`, `member_id`, `reservation_id`, `tabl
 (2, 1, 1, NULL, 1, NULL, 'cash', '2024-05-19 22:21:33', '2024-05-19 22:25:25'),
 (3, 1, 1, NULL, 2, NULL, 'cash', '2024-05-19 22:26:15', '2024-05-19 22:29:11'),
 (4, 1, 1, NULL, 1, NULL, 'cash', '2024-05-19 22:29:48', '2024-05-19 22:35:39'),
-(5, NULL, NULL, NULL, 1, NULL, NULL, '2024-05-19 22:52:49', NULL);
+(5, 4, 1, NULL, 1, NULL, 'cash', '2024-05-19 22:52:49', '2024-05-20 20:16:51'),
+(6, 1, 1, NULL, 2, NULL, 'cash', '2024-05-20 20:30:54', '2024-05-20 20:31:25');
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,8 @@ INSERT INTO `bill_items` (`bill_item_id`, `bill_id`, `item_id`, `quantity`) VALU
 (3, 2, 'H333', 1),
 (4, 3, 'H333', 5),
 (5, 4, 'H333', 12),
-(9, 5, 'H333', 7);
+(17, 5, 'H333', 21),
+(18, 6, 'H333', 100);
 
 -- --------------------------------------------------------
 
@@ -133,7 +136,8 @@ CREATE TABLE `kitchen` (
 
 INSERT INTO `kitchen` (`kitchen_id`, `table_id`, `item_id`, `quantity`, `time_submitted`, `time_ended`) VALUES
 (3, 2, 'H333', 5, '2024-05-19 22:26:19', '2024-05-19 22:52:28'),
-(8, 1, 'H333', 7, '2024-05-19 23:17:46', NULL);
+(16, 1, 'H333', 21, '2024-05-20 20:16:33', '2024-05-20 20:16:38'),
+(17, 2, 'H333', 100, '2024-05-20 20:31:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +157,7 @@ CREATE TABLE `memberships` (
 --
 
 INSERT INTO `memberships` (`member_id`, `member_name`, `points`, `account_id`) VALUES
-(1, 'Durlav Parajuli', 920, 3);
+(1, 'Durlav Parajuli', 5760, 3);
 
 -- --------------------------------------------------------
 
@@ -233,7 +237,8 @@ CREATE TABLE `staffs` (
 INSERT INTO `staffs` (`staff_id`, `staff_name`, `role`, `account_id`) VALUES
 (1, 'Rishab Pokhrel', 'Manager', 1),
 (2, 'Anil Sherpa', 'Staff', 2),
-(4, 'Shishir Panthi', 'Chef', 4);
+(4, 'Shishir Panthi', 'Chef', 4),
+(5, 'Shahrukh Khan', 'Manager', 5);
 
 -- --------------------------------------------------------
 
@@ -248,6 +253,52 @@ CREATE TABLE `table_availability` (
   `reservation_time` time DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblexpense`
+--
+
+CREATE TABLE `tblexpense` (
+  `ID` int(10) NOT NULL,
+  `UserId` int(10) NOT NULL,
+  `ExpenseDate` date DEFAULT NULL,
+  `ExpenseItem` varchar(200) DEFAULT NULL,
+  `ExpenseCost` varchar(200) DEFAULT NULL,
+  `NoteDate` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblexpense`
+--
+
+INSERT INTO `tblexpense` (`ID`, `UserId`, `ExpenseDate`, `ExpenseItem`, `ExpenseCost`, `NoteDate`) VALUES
+(35, 1, '2024-05-13', 'hh', '5656', '2024-05-20 17:37:31'),
+(36, 1, '2024-05-14', 'gsdg', '5465', '2024-05-20 17:57:19'),
+(37, 1, '2024-05-15', 'gsdagsa', '5454', '2024-05-20 17:57:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbluser`
+--
+
+CREATE TABLE `tbluser` (
+  `ID` int(10) NOT NULL,
+  `FullName` varchar(150) DEFAULT NULL,
+  `Email` varchar(200) DEFAULT NULL,
+  `MobileNumber` bigint(10) DEFAULT NULL,
+  `Password` varchar(200) DEFAULT NULL,
+  `RegDate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbluser`
+--
+
+INSERT INTO `tbluser` (`ID`, `FullName`, `Email`, `MobileNumber`, `Password`, `RegDate`) VALUES
+(1, 'Manager', 'test@gmail.com', 123456789, 'cc03e747a6afbbcbf8be7668acfebee5', '2024-05-20 17:37:10');
 
 --
 -- Indexes for dumped tables
@@ -333,6 +384,18 @@ ALTER TABLE `table_availability`
   ADD KEY `table_id` (`table_id`);
 
 --
+-- Indexes for table `tblexpense`
+--
+ALTER TABLE `tblexpense`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `tbluser`
+--
+ALTER TABLE `tbluser`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -340,19 +403,19 @@ ALTER TABLE `table_availability`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `bill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `bill_items`
 --
 ALTER TABLE `bill_items`
-  MODIFY `bill_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `bill_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `card_payments`
@@ -364,7 +427,7 @@ ALTER TABLE `card_payments`
 -- AUTO_INCREMENT for table `kitchen`
 --
 ALTER TABLE `kitchen`
-  MODIFY `kitchen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kitchen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `memberships`
@@ -388,13 +451,25 @@ ALTER TABLE `restaurant_tables`
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `table_availability`
 --
 ALTER TABLE `table_availability`
   MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblexpense`
+--
+ALTER TABLE `tblexpense`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `tbluser`
+--
+ALTER TABLE `tbluser`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
