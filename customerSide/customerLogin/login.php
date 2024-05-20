@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 </form>
 
-                <p style="margin-top:1em; color:white;">Don't have an account? <a href="register.php" style="">Proceed to Register</a></p>
+                <p style="margin-top:1em; color:white;">Don't have an account? <a href="register.php">Proceed to Register</a></p>
             </div>
         </div>
     </div>
