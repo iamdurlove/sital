@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // After successful login, store staff_name in session
                 $_SESSION['logged_account_id'] = $provided_account_id;
                 $_SESSION['logged_staff_name'] = $logged_staff_name;
+                $_SESSION['detsuid'] = $provided_account_id;
 
                 // check the role of the staff
                 $role_query = "SELECT * FROM staffs WHERE account_id = '$provided_account_id'";

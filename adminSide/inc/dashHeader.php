@@ -100,6 +100,11 @@ $staff_role = $row['role'];
                                 Kitchen
                             </a>
                             <div class="sb-sidenav-menu-heading">Report & Analytics</div>
+                            
+                            <a class="nav-link" target="_blank" href="redirect.php">
+                                <div class="sb-nav-link-icon"><i class="fas fa-fire"></i></div>
+                                Expense Tracker
+                            </a>
                             <a class="nav-link" href="../panel/sales-panel.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-fire"></i></div>
                                 Items Sales

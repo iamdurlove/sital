@@ -96,5 +96,5 @@ $result = mysqli_query($link, $query);
 
     // Call checkForNewOrders initially and set interval for periodic checks
     checkForNewOrders();
-    setInterval(checkForNewOrders, 4000); // Check every 5 seconds
+    setInterval(checkForNewOrders, 1000); // Check every 5 seconds
 </script>
